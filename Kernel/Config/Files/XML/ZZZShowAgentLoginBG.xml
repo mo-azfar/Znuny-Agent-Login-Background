@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Config">
+    <Setting Name="Frontend::Output::FilterElementPost###ShowAgentLoginBG" Required="0" Valid="1">
+        <Description Translatable="1">Module to show agent login background. Check AgentLoginBackground setting for further setting</Description>
+        <Navigation>Frontend::Base::OutputFilter</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::FilterElementPost::ShowAgentLoginBG</Item>
+                <Item Key="Templates">
+                    <Hash>
+                        <Item Key="Login">1</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLoginBackground" Required="0" Valid="1">
+        <Description Translatable="1">The background image of the agent login page. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="BackgroundURL">skins/Agent/default/img/klcc.jpg</Item>
+                <Item Key="BackgroundWidth">100%</Item>
+                <Item Key="BackgroundHeight">100%</Item>
+                <Item Key="BackgroundPosition">center center</Item>
+                <Item Key="BackgroundRepeat">no-repeat</Item>
+                <Item Key="BackgroundAttachment">fixed</Item>
+                <Item Key="BackgroundSize">cover</Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>
