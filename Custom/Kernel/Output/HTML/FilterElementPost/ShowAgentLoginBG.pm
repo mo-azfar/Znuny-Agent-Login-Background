@@ -78,9 +78,15 @@ sub Run {
             my $ReturnField2 = qq~ <div class="MainBox ARIARoleMain" style="background:transparent;">
             ~;
         
+            # add background color to maintenance text / warning box
+			my $SearchWarning = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";
+			my $ReturnWarning = qq~<div class="MessageBox WithIcon" id="SystemMaintenance" style="background-color:#deb887;">
+			~;
+
             #search and replace	 
             ${ $Param{Data} } =~ s{$SearchField1}{$ReturnField1};
             ${ $Param{Data} } =~ s{$SearchField2}{$ReturnField2};
+            ${ $Param{Data} } =~ s{$SearchWarning}{$ReturnWarning};
         }        
 		
     }  
