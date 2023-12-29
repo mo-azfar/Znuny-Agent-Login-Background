@@ -14,7 +14,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="AgentLoginBackground" Required="0" Valid="1">
+    <Setting Name="AgentLoginBackground" Required="1" Valid="1">
         <Description Translatable="1">The background image of the agent login page. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
@@ -26,6 +26,26 @@
                 <Item Key="BackgroundRepeat">no-repeat</Item>
                 <Item Key="BackgroundAttachment">fixed</Item>
                 <Item Key="BackgroundSize">cover</Item>
+            </Hash>
+        </Value>
+    </Setting>
+	<Setting Name="ShowAgentLoginFormBackground" Required="1" Valid="1">
+        <Description Translatable="1">use default login form background (white) or others or transparent</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AgentLoginFormBackgroundHexCode">#ffffff</Item>
+				<Item Key="AgentLoginFormBorderHexCode">#ffffff</Item>
+            </Hash>
+        </Value>
+    </Setting>
+	<Setting Name="ShowMOTDBackground" Required="1" Valid="1">
+        <Description Translatable="1">if motd enable, use default motd background (white) or others or transparent</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="MOTDBackgroundHexCode">#ffffff</Item>
+				<Item Key="MOTDBorderHexCode">#ffffff</Item>
             </Hash>
         </Value>
     </Setting>

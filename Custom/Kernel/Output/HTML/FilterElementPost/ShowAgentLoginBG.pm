@@ -79,14 +79,30 @@ sub Run {
             ~;
         
             # add background color to maintenance text / warning box
-			my $SearchWarning = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";
-			my $ReturnWarning = qq~<div class="MessageBox WithIcon" id="SystemMaintenance" style="background-color:#deb887;">
+			my $SearchField3 = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";
+			my $ReturnField3 = qq~<div class="MessageBox WithIcon" id="SystemMaintenance" style="background-color:#deb887;">
+			~;
+
+            #set agent login form background and border color
+			my %AgentLoginFormBackground = %{ $ConfigObject->Get('ShowAgentLoginFormBackground') };
+			
+			my $SearchField4 = quotemeta "<div class=\"WidgetSimple\">";
+			my $ReturnField4 = qq~<div class="WidgetSimple" style="background: $AgentLoginFormBackground{'AgentLoginFormBackgroundHexCode'}; border: $AgentLoginFormBackground{'AgentLoginFormBorderHexCode'};">
+			~;
+			
+			#set motd background and border color
+			my %MOTDBackground = %{ $ConfigObject->Get('ShowMOTDBackground') };
+			
+			my $SearchField5 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
+			my $ReturnField5 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $MOTDBackground{'MOTDBackgroundHexCode'}; border: $MOTDBackground{'MOTDBorderHexCode'};">
 			~;
 
             #search and replace	 
             ${ $Param{Data} } =~ s{$SearchField1}{$ReturnField1};
             ${ $Param{Data} } =~ s{$SearchField2}{$ReturnField2};
-            ${ $Param{Data} } =~ s{$SearchWarning}{$ReturnWarning};
+            ${ $Param{Data} } =~ s{$SearchField3}{$ReturnField3};
+            ${ $Param{Data} } =~ s{$SearchField4}{$ReturnField4};
+			${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};
         }        
 		
     }  
