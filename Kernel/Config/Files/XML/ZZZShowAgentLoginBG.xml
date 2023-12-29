@@ -34,8 +34,18 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="AgentLoginFormBackgroundHexCode">#ffffff</Item>
-				<Item Key="AgentLoginFormBorderHexCode">#ffffff</Item>
+                <Item Key="AgentLoginFormBackground">#ffffff</Item>
+				<Item Key="AgentLoginFormBorder">#ffffff</Item>
+            </Hash>
+        </Value>
+    </Setting>
+	<Setting Name="ShowAgentLoginLabelColor" Required="1" Valid="1">
+        <Description Translatable="1">use default label color (black) or others at agent login Username and Password label.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AgentUsernameLabelColor">#251c17</Item>
+				<Item Key="AgentPasswordLabelColor">#251c17</Item>
             </Hash>
         </Value>
     </Setting>
@@ -44,8 +54,8 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="MOTDBackgroundHexCode">#ffffff</Item>
-				<Item Key="MOTDBorderHexCode">#ffffff</Item>
+                <Item Key="MOTDBackground">#ffffff</Item>
+				<Item Key="MOTDBorder">#ffffff</Item>
             </Hash>
         </Value>
     </Setting>

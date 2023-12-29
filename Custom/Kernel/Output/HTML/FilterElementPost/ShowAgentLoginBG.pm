@@ -87,14 +87,25 @@ sub Run {
 			my %AgentLoginFormBackground = %{ $ConfigObject->Get('ShowAgentLoginFormBackground') };
 			
 			my $SearchField4 = quotemeta "<div class=\"WidgetSimple\">";
-			my $ReturnField4 = qq~<div class="WidgetSimple" style="background: $AgentLoginFormBackground{'AgentLoginFormBackgroundHexCode'}; border: $AgentLoginFormBackground{'AgentLoginFormBorderHexCode'};">
+			my $ReturnField4 = qq~<div class="WidgetSimple" style="background: $AgentLoginFormBackground{'AgentLoginFormBackground'}; border: $AgentLoginFormBackground{'AgentLoginFormBorder'};">
+			~;
+
+            #set agent login username & password label color
+			my %AgentLoginLabelColor = %{ $ConfigObject->Get('ShowAgentLoginLabelColor') };
+			
+			my $SearchField5 = quotemeta "<label for=\"User\" class=\"Mandatory\">";
+			my $ReturnField5 = qq~<label for="User" class="Mandatory" style="color: $AgentLoginLabelColor{'AgentUsernameLabelColor'}">
+			~;
+
+            my $SearchField6 = quotemeta "<label for=\"Password\" class=\"Mandatory\">";
+			my $ReturnField6 = qq~<label for="Password" class="Mandatory" style="color: $AgentLoginLabelColor{'AgentPasswordLabelColor'}">
 			~;
 			
 			#set motd background and border color
 			my %MOTDBackground = %{ $ConfigObject->Get('ShowMOTDBackground') };
 			
-			my $SearchField5 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
-			my $ReturnField5 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $MOTDBackground{'MOTDBackgroundHexCode'}; border: $MOTDBackground{'MOTDBorderHexCode'};">
+			my $SearchField7 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
+			my $ReturnField7 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $MOTDBackground{'MOTDBackground'}; border: $MOTDBackground{'MOTDBorder'};">
 			~;
 
             #search and replace	 
@@ -103,6 +114,8 @@ sub Run {
             ${ $Param{Data} } =~ s{$SearchField3}{$ReturnField3};
             ${ $Param{Data} } =~ s{$SearchField4}{$ReturnField4};
 			${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};
+            ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};
+            ${ $Param{Data} } =~ s{$SearchField7}{$ReturnField7};
         }        
 		
     }  
