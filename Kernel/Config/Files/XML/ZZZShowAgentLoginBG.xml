@@ -29,33 +29,16 @@
             </Hash>
         </Value>
     </Setting>
-	<Setting Name="ShowAgentLoginFormBackground" Required="1" Valid="1">
-        <Description Translatable="1">use default login form background (white) or others or transparent</Description>
+    <Setting Name="AgentLoginBackgroundColor" Required="1" Valid="1">
+        <Description Translatable="1">Set the background color on the login form, login form label and motd background color. Default is white background and black text.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
                 <Item Key="AgentLoginFormBackground">#ffffff</Item>
 				<Item Key="AgentLoginFormBorder">#ffffff</Item>
-            </Hash>
-        </Value>
-    </Setting>
-	<Setting Name="ShowAgentLoginLabelColor" Required="1" Valid="1">
-        <Description Translatable="1">use default label color (black) or others at agent login Username and Password label.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="AgentUsernameLabelColor">#251c17</Item>
-				<Item Key="AgentPasswordLabelColor">#251c17</Item>
-            </Hash>
-        </Value>
-    </Setting>
-	<Setting Name="ShowMOTDBackground" Required="1" Valid="1">
-        <Description Translatable="1">if motd enable, use default motd background (white) or others or transparent</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="MOTDBackground">#ffffff</Item>
-				<Item Key="MOTDBorder">#ffffff</Item>
+                <Item Key="AgentMOTDBackground">#ffffff</Item>
+				<Item Key="AgentMOTDBorder">#ffffff</Item>
+                <Item Key="AgentLabelColor">#251c17</Item>
             </Hash>
         </Value>
     </Setting>

@@ -72,50 +72,60 @@ sub Run {
             my $SearchField1 = quotemeta "<div id=\"AppWrapper\">";
             my $ReturnField1 = qq~$CSS <div id="AppWrapper" class="LoginBG">
             ~;
+            #search and replace	 
+            ${ $Param{Data} } =~ s{$SearchField1}{$ReturnField1};
 
             #set mainbox to have transparent background
             my $SearchField2 = quotemeta " <div class=\"MainBox ARIARoleMain\">";
             my $ReturnField2 = qq~ <div class="MainBox ARIARoleMain" style="background:transparent;">
             ~;
-        
+            #search and replace
+            ${ $Param{Data} } =~ s{$SearchField2}{$ReturnField2};
+
             # add background color to maintenance text / warning box
 			my $SearchField3 = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";
 			my $ReturnField3 = qq~<div class="MessageBox WithIcon" id="SystemMaintenance" style="background-color:#deb887;">
 			~;
-
-            #set agent login form background and border color
-			my %AgentLoginFormBackground = %{ $ConfigObject->Get('ShowAgentLoginFormBackground') };
-			
-			my $SearchField4 = quotemeta "<div class=\"WidgetSimple\">";
-			my $ReturnField4 = qq~<div class="WidgetSimple" style="background: $AgentLoginFormBackground{'AgentLoginFormBackground'}; border: $AgentLoginFormBackground{'AgentLoginFormBorder'};">
-			~;
-
-            #set agent login username & password label color
-			my %AgentLoginLabelColor = %{ $ConfigObject->Get('ShowAgentLoginLabelColor') };
-			
-			my $SearchField5 = quotemeta "<label for=\"User\" class=\"Mandatory\">";
-			my $ReturnField5 = qq~<label for="User" class="Mandatory" style="color: $AgentLoginLabelColor{'AgentUsernameLabelColor'}">
-			~;
-
-            my $SearchField6 = quotemeta "<label for=\"Password\" class=\"Mandatory\">";
-			my $ReturnField6 = qq~<label for="Password" class="Mandatory" style="color: $AgentLoginLabelColor{'AgentPasswordLabelColor'}">
-			~;
-			
-			#set motd background and border color
-			my %MOTDBackground = %{ $ConfigObject->Get('ShowMOTDBackground') };
-			
-			my $SearchField7 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
-			my $ReturnField7 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $MOTDBackground{'MOTDBackground'}; border: $MOTDBackground{'MOTDBorder'};">
-			~;
-
-            #search and replace	 
-            ${ $Param{Data} } =~ s{$SearchField1}{$ReturnField1};
-            ${ $Param{Data} } =~ s{$SearchField2}{$ReturnField2};
+            #search and replace
             ${ $Param{Data} } =~ s{$SearchField3}{$ReturnField3};
-            ${ $Param{Data} } =~ s{$SearchField4}{$ReturnField4};
-			${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};
-            ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};
-            ${ $Param{Data} } =~ s{$SearchField7}{$ReturnField7};
+
+			#color
+            my %AgentLoginBackgroundColor = %{ $ConfigObject->Get('AgentLoginBackgroundColor') };
+			
+            #check if login form color need to be change
+            if ( $AgentLoginBackgroundColor{'AgentLoginFormBackground'} )
+            {
+                #set agent login form background and border color
+                my $SearchField4 = quotemeta "<div class=\"WidgetSimple\">";
+                my $ReturnField4 = qq~<div class="WidgetSimple" style="background: $AgentLoginBackgroundColor{'AgentLoginFormBackground'}; border: $AgentLoginBackgroundColor{'AgentLoginFormBorder'};">
+                ~;
+                #search and replace
+                ${ $Param{Data} } =~ s{$SearchField4}{$ReturnField4};
+            }
+            
+             #check if label color need to be change
+            if ( $AgentLoginBackgroundColor{'AgentLabelColor'} )
+            {
+                #set agent login username & password label color
+                for my $Label ( qw( User Password ) )
+                {
+                    my $SearchField5 = quotemeta "<label for=\"$Label\" class=\"Mandatory\">";
+                    my $ReturnField5 =  qq~<label for="$Label" class="Mandatory" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
+                    ~; 
+                    ${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};  
+                }
+            }
+            
+			if ( $AgentLoginBackgroundColor{'AgentMOTDBackground'} )
+            {
+                #set motd background and border color
+                my $SearchField6 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
+                my $ReturnField6 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $AgentLoginBackgroundColor{'AgentMOTDBackground'}; border: $AgentLoginBackgroundColor{'AgentMOTDBorder'};">
+                ~;
+                #search and replace	 
+                ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};  
+            }
+			
         }        
 		
     }  
