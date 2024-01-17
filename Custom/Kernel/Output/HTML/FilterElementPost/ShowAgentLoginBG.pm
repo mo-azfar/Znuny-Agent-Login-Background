@@ -106,24 +106,31 @@ sub Run {
              #check if label color need to be change
             if ( $AgentLoginBackgroundColor{'AgentLabelColor'} )
             {
-                #set agent login username & password label color
-                for my $Label ( qw( User Password ) )
+                #set agent login username, password and 2fa label color
+                for my $Label ( qw( User Password TwoFactorToken ) )
                 {
                     my $SearchField5 = quotemeta "<label for=\"$Label\" class=\"Mandatory\">";
                     my $ReturnField5 =  qq~<label for="$Label" class="Mandatory" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
                     ~; 
                     ${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};  
                 }
+
+                #non mandatory 2fa field
+                my $SearchField6 = quotemeta "<label for=\"TwoFactorToken\" class=\"\">";
+                my $ReturnField6 =  qq~<label for="TwoFactorToken" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
+                ~; 
+                ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};  
+
             }
             
 			if ( $AgentLoginBackgroundColor{'AgentMOTDBackground'} )
             {
                 #set motd background and border color
-                my $SearchField6 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
-                my $ReturnField6 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $AgentLoginBackgroundColor{'AgentMOTDBackground'}; border: $AgentLoginBackgroundColor{'AgentMOTDBorder'};">
+                my $SearchField7 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
+                my $ReturnField7 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $AgentLoginBackgroundColor{'AgentMOTDBackground'}; border: $AgentLoginBackgroundColor{'AgentMOTDBorder'};">
                 ~;
                 #search and replace	 
-                ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};  
+                ${ $Param{Data} } =~ s{$SearchField7}{$ReturnField7};  
             }
 			
         }        
