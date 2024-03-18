@@ -13,4 +13,4 @@
 		AgentMOTDBorder =  color of the MOTD border.
 	
 	
-![agent-login-bg](agent-login-bg.png)
+![agent-login-bg](doc/en/images/agent-login-bg.png)

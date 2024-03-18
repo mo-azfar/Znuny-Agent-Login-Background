@@ -30,7 +30,6 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $ConfigObject                    = $Kernel::OM->Get('Kernel::Config');
-    #my $ParamObject                     = $Kernel::OM->Get('Kernel::System::Web::Request');
 	
 	# --
 	# Agent Login Background
@@ -81,6 +80,19 @@ sub Run {
             ~;
             #search and replace
             ${ $Param{Data} } =~ s{$SearchField2}{$ReturnField2};
+
+
+            my %AgentLoginAlert = %{ $ConfigObject->Get('AgentLoginAlert') };
+
+            if ( $AgentLoginAlert{'Alert'} )
+            {
+                my $SearchAlert = quotemeta "<div class=\"WidgetSimple\">";
+			    my $ReturnAlert = qq~<div class="MessageBox WithIcon" id="Alert" style="background-color: $AgentLoginAlert{'AlertBackground'}; color: $AgentLoginAlert{'AlertTextColor'}; margin-bottom: 15px;"><p>$AgentLoginAlert{'AlertText'}</p></div>
+                <div class="WidgetSimple">
+			    ~;
+                #search and replace
+                ${ $Param{Data} } =~ s{$SearchAlert}{$ReturnAlert};
+            }
 
             # add background color to maintenance text / warning box
 			my $SearchField3 = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";

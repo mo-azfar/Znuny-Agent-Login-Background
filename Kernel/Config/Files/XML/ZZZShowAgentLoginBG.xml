@@ -42,4 +42,21 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="AgentLoginAlert" Required="1" Valid="1">
+        <Description Translatable="1">Set the background color on the login alert and its font color.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AlertBackground">#21ad00</Item>
+				<Item Key="AlertTextColor">#ffffff</Item>
+                <Item Key="AlertText">Please update AgentLoginAlert</Item>
+                <Item Key="Alert" ValueType="Select" SelectedID="1">
+                    <Item ValueType="Option" Value="0" Translatable="1">Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">Enabled</Item>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>
+
+        
