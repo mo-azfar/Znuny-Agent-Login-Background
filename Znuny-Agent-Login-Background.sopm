@@ -14,7 +14,7 @@
     <ChangeLog Version="7.0.7" Date="2024-01-17 10:00:00 +0800">Add support for 2fa label color.</ChangeLog>
     <ChangeLog Version="7.0.8" Date="2024-02-20 10:00:00 +0800">Add support for forgot password section background and label color.</ChangeLog>
     <ChangeLog Version="7.0.9" Date="2024-02-20 15:00:00 +0800">Add support for alert notice.</ChangeLog>
-    <ChangeLog Version="7.0.10" Date="2023-11-27 10:00:00 +0800">Remove commented code.</ChangeLog>
+    <ChangeLog Version="7.0.10" Date="2024-03-19 07:00:00 +0800">Remove commented code.</ChangeLog>
 	<Description Lang="en">Display agent login background image</Description>
 	<Framework>7.0.x</Framework>
 	<IntroInstall Lang="en" Title="Install Information" Type="pre"><![CDATA[
