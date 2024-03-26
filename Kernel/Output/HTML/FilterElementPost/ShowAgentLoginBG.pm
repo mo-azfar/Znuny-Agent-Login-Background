@@ -1,9 +1,11 @@
 # --
-# Copyright (C) 2023 mo-azfar,https://github.com/mo-azfar
+# Copyright (C) 2001-2024 OTRS AG, https://otrs.com/
+# --
+# $origin: otrs - 0000000000000000000000000000000000000000 - Kernel/Output/HTML/FilterElementPost/ShowAgentLoginBG.pm
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (AGPL). If you
-# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
 package Kernel::Output::HTML::FilterElementPost::ShowAgentLoginBG;
@@ -29,14 +31,14 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject                    = $Kernel::OM->Get('Kernel::Config');
-	
-	# --
-	# Agent Login Background
-	# --
-	if ( $Param{TemplateFile} eq 'Login')
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+# ---
+    # Agent Login Background
+# ---
+    if ( $Param{TemplateFile} eq 'Login' )
     {
-        if ( defined $ConfigObject->Get('AgentLoginBackground') ) 
+        if ( defined $ConfigObject->Get('AgentLoginBackground') )
         {
             my %AgentLoginBackground = %{ $ConfigObject->Get('AgentLoginBackground') };
             my %Data;
@@ -67,50 +69,57 @@ sub Run {
             </style>
             ~;
 
-             #set background class on app wrapper
+            #set background class on app wrapper
             my $SearchField1 = quotemeta "<div id=\"AppWrapper\">";
             my $ReturnField1 = qq~$CSS <div id="AppWrapper" class="LoginBG">
             ~;
-            #search and replace	 
+
+            #search and replace
             ${ $Param{Data} } =~ s{$SearchField1}{$ReturnField1};
 
             #set mainbox to have transparent background
             my $SearchField2 = quotemeta " <div class=\"MainBox ARIARoleMain\">";
             my $ReturnField2 = qq~ <div class="MainBox ARIARoleMain" style="background:transparent;">
             ~;
+
             #search and replace
             ${ $Param{Data} } =~ s{$SearchField2}{$ReturnField2};
-
 
             my %AgentLoginAlert = %{ $ConfigObject->Get('AgentLoginAlert') };
 
             if ( $AgentLoginAlert{'Alert'} )
             {
                 my $SearchAlert = quotemeta "<div class=\"WidgetSimple\">";
-			    my $ReturnAlert = qq~<div class="MessageBox WithIcon" id="Alert" style="background-color: $AgentLoginAlert{'AlertBackground'}; color: $AgentLoginAlert{'AlertTextColor'}; margin-bottom: 15px;"><p>$AgentLoginAlert{'AlertText'}</p></div>
+                my $ReturnAlert
+                    = qq~<div class="MessageBox WithIcon" id="Alert" style="background-color: $AgentLoginAlert{'AlertBackground'}; color: $AgentLoginAlert{'AlertTextColor'}; margin-bottom: 15px;"><p>$AgentLoginAlert{'AlertText'}</p></div>
                 <div class="WidgetSimple">
-			    ~;
+                ~;
+
                 #search and replace
                 ${ $Param{Data} } =~ s{$SearchAlert}{$ReturnAlert};
             }
 
             # add background color to maintenance text / warning box
-			my $SearchField3 = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";
-			my $ReturnField3 = qq~<div class="MessageBox WithIcon" id="SystemMaintenance" style="background-color:#deb887;">
-			~;
+            my $SearchField3 = quotemeta "<div class=\"MessageBox WithIcon\" id=\"SystemMaintenance\">";
+            my $ReturnField3
+                = qq~<div class="MessageBox WithIcon" id="SystemMaintenance" style="background-color:#deb887;">
+            ~;
+
             #search and replace
             ${ $Param{Data} } =~ s{$SearchField3}{$ReturnField3};
 
-			#color
+            #color
             my %AgentLoginBackgroundColor = %{ $ConfigObject->Get('AgentLoginBackgroundColor') };
-			
+
             #check if login form color need to be change
             if ( $AgentLoginBackgroundColor{'AgentLoginFormBackground'} )
             {
                 #set agent login form background and border color
                 my $SearchField4 = quotemeta "<div class=\"WidgetSimple\">";
-                my $ReturnField4 = qq~<div class="WidgetSimple" style="background: $AgentLoginBackgroundColor{'AgentLoginFormBackground'}; border: $AgentLoginBackgroundColor{'AgentLoginFormBorder'};">
+                my $ReturnField4
+                    = qq~<div class="WidgetSimple" style="background: $AgentLoginBackgroundColor{'AgentLoginFormBackground'}; border: $AgentLoginBackgroundColor{'AgentLoginFormBorder'};">
                 ~;
+
                 #search and replace
                 ${ $Param{Data} } =~ s{$SearchField4}{$ReturnField4};
 
@@ -122,42 +131,49 @@ sub Run {
             if ( $AgentLoginBackgroundColor{'AgentLabelColor'} )
             {
                 #set agent login username, password and 2fa label color
-                for my $Label ( qw( User Password TwoFactorToken ) )
+                for my $Label (qw( User Password TwoFactorToken ))
                 {
                     my $SearchField5 = quotemeta "<label for=\"$Label\" class=\"Mandatory\">";
-                    my $ReturnField5 =  qq~<label for="$Label" class="Mandatory" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
-                    ~; 
-                    ${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};  
+                    my $ReturnField5
+                        = qq~<label for="$Label" class="Mandatory" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
+                    ~;
+                    ${ $Param{Data} } =~ s{$SearchField5}{$ReturnField5};
                 }
 
                 #non mandatory 2fa field
                 my $SearchField6 = quotemeta "<label for=\"TwoFactorToken\" class=\"\">";
-                my $ReturnField6 =  qq~<label for="TwoFactorToken" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
-                ~; 
-                ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};  
+                my $ReturnField6
+                    = qq~<label for="TwoFactorToken" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
+                ~;
+                ${ $Param{Data} } =~ s{$SearchField6}{$ReturnField6};
 
                 #Username field for forgot password section
                 my $SearchField7 = quotemeta "<label class=\"\" for=\"PasswordUser\" class=\"Mandatory\">";
-                my $ReturnField7 =  qq~<label class="" for="PasswordUser" class="Mandatory" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
+                my $ReturnField7
+                    = qq~<label class="" for="PasswordUser" class="Mandatory" style="color: $AgentLoginBackgroundColor{'AgentLabelColor'}">
                 ~;
-                ${ $Param{Data} } =~ s{$SearchField7}{$ReturnField7};  
+                ${ $Param{Data} } =~ s{$SearchField7}{$ReturnField7};
             }
-            
-			if ( $AgentLoginBackgroundColor{'AgentMOTDBackground'} )
+
+            if ( $AgentLoginBackgroundColor{'AgentMOTDBackground'} )
             {
                 #set motd background and border color
-                my $SearchField8 = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
-                my $ReturnField8 = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $AgentLoginBackgroundColor{'AgentMOTDBackground'}; border: $AgentLoginBackgroundColor{'AgentMOTDBorder'};">
+                my $SearchField8
+                    = quotemeta "<div class=\"WidgetSimple MessageOfTheDayBox\" id=\"MessageOfTheDayBox\">";
+                my $ReturnField8
+                    = qq~<div class="WidgetSimple MessageOfTheDayBox" id="MessageOfTheDayBox" style="background: $AgentLoginBackgroundColor{'AgentMOTDBackground'}; border: $AgentLoginBackgroundColor{'AgentMOTDBorder'};">
                 ~;
-                #search and replace	 
-                ${ $Param{Data} } =~ s{$SearchField8}{$ReturnField8};  
+
+                #search and replace
+                ${ $Param{Data} } =~ s{$SearchField8}{$ReturnField8};
             }
-			
-        }        
-		
-    }  
-	# --
-	
+
+        }
+
+    }
+
+# ---
+
     return 1;
 }
 
