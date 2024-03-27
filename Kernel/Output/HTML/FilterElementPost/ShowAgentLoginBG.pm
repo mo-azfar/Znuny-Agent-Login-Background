@@ -1,7 +1,5 @@
 # --
-# Copyright (C) 2001-2024 OTRS AG, https://otrs.com/
-# --
-# $origin: otrs - 0000000000000000000000000000000000000000 - Kernel/Output/HTML/FilterElementPost/ShowAgentLoginBG.pm
+# Copyright (C) 2022-2024 mo-azfar, https://github.com/mo-azfar
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -33,9 +31,6 @@ sub Run {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-# ---
-    # Agent Login Background
-# ---
     if ( $Param{TemplateFile} eq 'Login' )
     {
         if ( defined $ConfigObject->Get('AgentLoginBackground') )
@@ -171,8 +166,6 @@ sub Run {
         }
 
     }
-
-# ---
 
     return 1;
 }
